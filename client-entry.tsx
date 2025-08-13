@@ -15,35 +15,43 @@ const activate = (): void => {
   const convertShortcodes = () => {
     const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
     let node: Node | null;
+
     while ((node = walker.nextNode())) {
       const text = node.nodeValue;
       if (!text) continue;
 
-      // [input name="xxx" placeholder="yyy"] を検出
       const regex = /\[input\s+name="([^"]+)"\s+placeholder="([^"]+)"\]/g;
       let match: RegExpExecArray | null;
-      let replaced = false;
       let lastIndex = 0;
-      const frag = document.createDocumentFragment();
+      const parent = node.parentNode;
+      if (!parent) continue;
+
+      const nodesToInsert: Node[] = [];
 
       while ((match = regex.exec(text)) !== null) {
-        replaced = true;
-        // 前半テキストを追加
-        frag.appendChild(document.createTextNode(text.slice(lastIndex, match.index)));
+        // 前半のテキスト
+        const textNode = document.createTextNode(text.slice(lastIndex, match.index));
+        nodesToInsert.push(textNode);
 
-        // input 要素作成
+        // input 要素
         const input = document.createElement('input');
         input.type = 'text';
         input.name = match[1];
         input.placeholder = match[2];
-        frag.appendChild(input);
+        nodesToInsert.push(input);
 
         lastIndex = regex.lastIndex;
       }
 
-      if (replaced) {
-        frag.appendChild(document.createTextNode(text.slice(lastIndex)));
-        node.parentNode?.replaceChild(frag, node);
+      if (lastIndex > 0) {
+        // 残りのテキスト
+        nodesToInsert.push(document.createTextNode(text.slice(lastIndex)));
+
+        // 挿入
+        nodesToInsert.forEach(n => parent.insertBefore(n, node));
+
+        // 元のテキストノードを削除
+        parent.removeChild(node);
       }
     }
   };
