@@ -3,6 +3,6 @@
   "version": "0.0.1",
   "description": "A Growi plugin that replaces code placeholders with user inputs",
   "type": "script",
-  "entry": "client-entry-BBC_lsJ7.js",
+  "entry": "client-entry.js",
   "author": "toollabo-tamori"
 }

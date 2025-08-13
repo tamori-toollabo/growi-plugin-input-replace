@@ -1,6 +1,8 @@
 // client-entry.tsx
 import './style.css'; // 任意でCSS読み込み
 
+declare const growiFacade: any;
+
 const activate = (): void => {
   // GROWI本体が利用可能か確認
   if (typeof growiFacade === 'undefined' || growiFacade.markdownRenderer == null) {
