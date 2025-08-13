@@ -4,6 +4,7 @@
   "description": "A Growi plugin that dynamically replaces code placeholders with user inputs./Growiページのコードブロック内の変数を、入力欄の値で動的に置換するプラグイン",
   "devDependencies": {
     "@growi/pluginkit": "^1.1.0",
+    "@vitejs/plugin-react": "^5.0.0",
     "vite": "^7.1.2"
   },
   "growiPlugin": {
