@@ -4,7 +4,6 @@ import { resolve } from 'path';
 import fs from 'fs';
 
 export default defineConfig({
-  plugins: [react()],
   build: {
     manifest: true,
     outDir: 'dist',
@@ -12,7 +11,7 @@ export default defineConfig({
       input: ['/client-entry.tsx'],
     },
   },
-  plugins: [
+  plugins: [react(),
     {
       name: 'generate-growi-manifest',
       writeBundle() {
