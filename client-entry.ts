@@ -1,18 +1,47 @@
 // client-entry.ts
 import './style.css'; // 任意でCSS読み込み
 
+function convertShortcodes() {
+  // ページ全体のテキストノードを走査
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  let node: Node | null;
+  while ((node = walker.nextNode())) {
+    const text = node.nodeValue;
+    if (!text) continue;
+
+    // [input name="xxx" placeholder="yyy"] を検出
+    const regex = /\[input\s+name="([^"]+)"\s+placeholder="([^"]+)"\]/g;
+    let match: RegExpExecArray | null;
+    let replaced = false;
+    let lastIndex = 0;
+    const frag = document.createDocumentFragment();
+
+    while ((match = regex.exec(text)) !== null) {
+      replaced = true;
+      // テキストの前半を追加
+      frag.appendChild(document.createTextNode(text.slice(lastIndex, match.index)));
+
+      // input 要素を作成
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.name = match[1];
+      input.placeholder = match[2];
+      frag.appendChild(input);
+
+      lastIndex = regex.lastIndex;
+    }
+
+    if (replaced) {
+      frag.appendChild(document.createTextNode(text.slice(lastIndex)));
+      node.parentNode?.replaceChild(frag, node);
+    }
+  }
+}
+
 // ページ読み込み後に実行
 document.addEventListener('DOMContentLoaded', () => {
   // 1. [input name="xxx"] ショートコードを input 要素に置換
-  document.querySelectorAll<HTMLElement>('[data-shortcode="input"]').forEach(el => {
-    const name = el.getAttribute('data-name') || '';
-    const placeholder = el.getAttribute('data-placeholder') || '';
-    const input = document.createElement('input');
-    input.type = 'text';
-    input.name = name;
-    input.placeholder = placeholder;
-    el.replaceWith(input);
-  });
+  convertShortcodes();
 
   // 2. ページ内の置換対象を記録
   const placeholders: { node: Text; template: string }[] = [];
