@@ -17,6 +17,7 @@ export default defineConfig({
       output: {
         entryFileNames: 'client.js',
       },
+      external: ['@growi/plugin']
     },
   },
   plugins: [react(),
