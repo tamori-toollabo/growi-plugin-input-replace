@@ -1,11 +1,12 @@
 {
-  "client-entry.tsx": {
-    "file": "assets/client-entry-CFW2yoDE.js",
+  "src/client-entry.tsx": {
+    "file": "client.js",
     "name": "client-entry",
-    "src": "client-entry.tsx",
-    "isEntry": true,
-    "css": [
-      "assets/client-entry-CLeSaUQI.css"
-    ]
+    "src": "src/client-entry.tsx",
+    "isEntry": true
+  },
+  "style.css": {
+    "file": "growi-plugin-input-replace.css",
+    "src": "style.css"
   }
 }
