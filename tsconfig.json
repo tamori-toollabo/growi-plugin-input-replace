@@ -1,8 +1,12 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "module": "ESNext",
+    "module": "commonjs",
     "moduleResolution": "Node",
+    "types" : [
+      "node",
+      "@growi/pluginkit"
+    ],
     "strict": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
@@ -11,5 +15,10 @@
     "declaration": true,
     "declarationMap": true
   },
-  "include": ["./client-entry.tsx"]
+  "include": [
+    "./src/**/*"
+  ],
+  "exclude": [
+    "./dist"
+  ]
 }

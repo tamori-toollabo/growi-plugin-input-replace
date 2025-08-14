@@ -3,6 +3,15 @@
   "version": "0.0.1",
   "description": "A Growi plugin that replaces code placeholders with user inputs",
   "type": "script",
-  "entry": "client-entry-CFW2yoDE.js",
-  "author": "toollabo-tamori"
+  "author": "toollabo-tamori",
+  "serverEntries": [
+    {
+      "src": "dist/server.js"
+    }
+  ],
+  "clientEntries": [
+    {
+      "src": "dist/client-entry.js"
+    }
+  ]
 }
