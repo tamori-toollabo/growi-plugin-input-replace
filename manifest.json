@@ -6,7 +6,7 @@
   "author": "toollabo-tamori",
   "clientEntries": [
     {
-      "src": "client-entry.js"
+      "src": "dist/client-entry.js"
     }
   ]
 }

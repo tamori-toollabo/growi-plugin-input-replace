@@ -32,11 +32,11 @@ export default defineConfig({
           author: 'toollabo-tamori',
           clientEntries: [
             {
-              src: 'client-entry.js'
+              src: 'dist/client-entry.js'
             }
           ]
         };
-        fs.writeFileSync(resolve(__dirname, 'dist/manifest.json'), JSON.stringify(manifest, null, 2));
+        fs.writeFileSync(resolve(__dirname, 'manifest.json'), JSON.stringify(manifest, null, 2));
       },
     },
   ],
