@@ -15,7 +15,7 @@ export default defineConfig({
     },
     rollupOptions: {
       output: {
-        entryFileNames: 'client.js',
+        entryFileNames: 'client-entry.js',
       },
       external: ['@growi/plugin']
     },
@@ -30,11 +30,6 @@ export default defineConfig({
           description: 'A Growi plugin that replaces code placeholders with user inputs',
           type: 'script',
           author: 'toollabo-tamori',
-          serverEntries: [
-            {
-              src: 'dist/server.js'
-            }
-          ],
           clientEntries: [
             {
               src: 'dist/client-entry.js'
