@@ -4,14 +4,9 @@
   "description": "A Growi plugin that replaces code placeholders with user inputs",
   "type": "script",
   "author": "toollabo-tamori",
-  "serverEntries": [
-    {
-      "src": "dist/server.js"
-    }
-  ],
   "clientEntries": [
     {
-      "src": "dist/client-entry.js"
+      "src": "dist/client.js"
     }
   ]
 }
