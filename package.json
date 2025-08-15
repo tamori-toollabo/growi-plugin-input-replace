@@ -11,6 +11,9 @@
   "devDependencies": {
     "@growi/pluginkit": "^1.1.0",
     "@types/node": "^24.2.1",
+    "@types/react": "^19.1.10",
+    "@types/react-dom": "^19.1.7",
+    "@types/unist": "^3.0.3",
     "@vitejs/plugin-react": "^5.0.0",
     "typescript": "^5.2.2",
     "vite": "^7.1.2"
@@ -24,5 +27,12 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build"
+  },
+  "dependencies": {
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "remark-directive": "^4.0.0",
+    "unified": "^11.0.5",
+    "unist-util-visit": "^5.0.0"
   }
 }
