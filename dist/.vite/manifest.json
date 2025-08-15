@@ -4,9 +4,5 @@
     "name": "client-entry",
     "src": "src/client-entry.tsx",
     "isEntry": true
-  },
-  "style.css": {
-    "file": "growi-plugin-input-replace.css",
-    "src": "style.css"
   }
 }
