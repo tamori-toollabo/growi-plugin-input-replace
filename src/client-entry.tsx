@@ -1,34 +1,48 @@
-// client-entry.tsx
-import './style.css'; // 任意でCSS読み込み
-
 declare const growiFacade: any;
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+import InputReplace from './components/InputReplace';
+import SpanReplace from './components/SpanReplace';
+import { inputReplacePlugin } from './remarkInputReplace';
+
+function replaceCustomTags() {
+  document.querySelectorAll('input-replace').forEach(el => {
+    const name = el.getAttribute('name') || '';
+    const placeholder = el.getAttribute('placeholder') || '';
+    createRoot(el).render(<InputReplace name={name} placeholder={placeholder} />);
+  });
+  document.querySelectorAll('span-replace').forEach(el => {
+    const target = el.getAttribute('target') || '';
+    const value = el.getAttribute('value') || '';
+    createRoot(el).render(<SpanReplace target={target} value={value} />);
+  });
+}
 
 const activate = (): void => {
-  // GROWI本体が利用可能か確認
-  if (typeof growiFacade === 'undefined' || growiFacade.markdownRenderer == null) {
+  if (typeof growiFacade === 'undefined' || growiFacade == null || growiFacade.markdownRenderer == null) {
     return;
   }
-
-  // ページ内すべての input の変化を監視
-  const updateReplace = () => {
-    const inputs = document.querySelectorAll<HTMLInputElement>('input[name]');
-    const values: Record<string,string> = {};
-    inputs.forEach(i => { values[i.name] = i.value; });
-
-    document.querySelectorAll<HTMLElement>('[data-replace]').forEach(el => {
-      let text = el.dataset.template || '';
-      Object.entries(values).forEach(([name, val]) => {
-        text = text.replace(new RegExp(`{{replace\\(${name}\\)}}`, 'g'), val);
-      });
-      el.textContent = text;
-    });
+  const { optionsGenerators } = growiFacade.markdownRenderer;
+  const originalCustomViewOptions = optionsGenerators.customGenerateViewOptions;
+  optionsGenerators.customGenerateViewOptions = (...args: any[]) => {
+    const options = originalCustomViewOptions ? originalCustomViewOptions(...args) : optionsGenerators.generateViewOptions(...args);
+    options.remarkPlugins.push(inputReplacePlugin as any);
+    return options;
   };
 
-  document.querySelectorAll<HTMLInputElement>('input[name]').forEach(input => {
-    input.addEventListener('input', updateReplace);
-  });
+  // For preview
+  const originalGeneratePreviewOptions = optionsGenerators.customGeneratePreviewOptions;
+  optionsGenerators.customGeneratePreviewOptions = (...args: any[]) => {
+    const preview = originalGeneratePreviewOptions ? originalGeneratePreviewOptions(...args) : optionsGenerators.generatePreviewOptions(...args);
+    preview.remarkPlugins.push(inputReplacePlugin as any);
+    return preview;
+  };
 
-  updateReplace();
+  if (document.readyState !== 'loading') {
+    replaceCustomTags();
+  } else {
+    document.addEventListener('DOMContentLoaded', replaceCustomTags);
+  }
 };
 
 const deactivate = (): void => {
@@ -43,3 +57,5 @@ if ((window as any).pluginActivators == null) {
   activate,
   deactivate,
 };
+
+export default activate;
