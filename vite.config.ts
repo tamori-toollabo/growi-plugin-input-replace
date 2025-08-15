@@ -6,7 +6,7 @@ import fs from 'fs';
 export default defineConfig({
   build: {
     manifest: true,
-    target: 'esnext',
+    target: 'ESNext',
     outDir: 'dist',
     lib: {
       entry: resolve(__dirname, 'src/client-entry.tsx'),
@@ -32,7 +32,7 @@ export default defineConfig({
           author: 'toollabo-tamori',
           clientEntries: [
             {
-              src: 'dist/client-entry.js'
+              src: 'client-entry.js'
             }
           ]
         };

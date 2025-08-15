@@ -1,7 +1,7 @@
 {
   "name": "growi-plugin-input-replace",
   "version": "0.0.1",
-  "main": "./dist/server.js",
+  "main": "./dist/client-entry.js",
   "description": "A Growi plugin that dynamically replaces code placeholders with user inputs./Growiページのコードブロック内の変数を、入力欄の値で動的に置換するプラグイン",
   "type": "module",
   "keywords": [
