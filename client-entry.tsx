@@ -27,8 +27,10 @@ const activate = (): void => {
   const originalCustomViewOptions = optionsGenerators.customGenerateViewOptions;
   optionsGenerators.customGenerateViewOptions = (...args: any[]) => {
     const options = originalCustomViewOptions ? originalCustomViewOptions(...args) : optionsGenerators.generateViewOptions(...args);
-    options.components['input-replace'] = InputReplace;
-    options.components['span-replace'] = SpanReplace;
+    const IR = options.components['input-replace'];
+    options.components['input-replace'] = InputReplace(IR);
+    const SR = options.components['span-replace'];
+    options.components['span-replace'] = SpanReplace(SR);
     options.remarkPlugins.push(remarkDirective);
     options.remarkPlugins.push(inputReplacePlugin as any);
     return options;
@@ -38,8 +40,10 @@ const activate = (): void => {
   const originalGeneratePreviewOptions = optionsGenerators.customGeneratePreviewOptions;
   optionsGenerators.customGeneratePreviewOptions = (...args: any[]) => {
     const preview = originalGeneratePreviewOptions ? originalGeneratePreviewOptions(...args) : optionsGenerators.generatePreviewOptions(...args);
-    preview.components['input-replace'] = InputReplace;
-    preview.components['span-replace'] = SpanReplace;
+    const IR = preview.components['input-replace'];
+    preview.components['input-replace'] = InputReplace(IR);
+    const SR = preview.components['span-replace'];
+    preview.components['span-replace'] = SpanReplace(SR);
     preview.remarkPlugins.push(remarkDirective);
     preview.remarkPlugins.push(inputReplacePlugin as any);
     return preview;
