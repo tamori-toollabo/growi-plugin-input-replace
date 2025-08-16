@@ -5,7 +5,7 @@ import InputReplace from './src/components/InputReplace';
 import SpanReplace from './src/components/SpanReplace';
 import { inputReplacePlugin } from './src/remarkInputReplace';
 
-function replaceCustomTags() {
+/*function replaceCustomTags() {
   document.querySelectorAll('input-replace').forEach(el => {
     const name = el.getAttribute('name') || '';
     const placeholder = el.getAttribute('placeholder') || '';
@@ -16,7 +16,7 @@ function replaceCustomTags() {
     const value = el.getAttribute('value') || '';
     createRoot(el).render(<SpanReplace target={target} value={value} />);
   });
-}
+}*/
 
 const activate = (): void => {
   if (typeof growiFacade === 'undefined' || growiFacade == null || growiFacade.markdownRenderer == null) {
@@ -26,6 +26,8 @@ const activate = (): void => {
   const originalCustomViewOptions = optionsGenerators.customGenerateViewOptions;
   optionsGenerators.customGenerateViewOptions = (...args: any[]) => {
     const options = originalCustomViewOptions ? originalCustomViewOptions(...args) : optionsGenerators.generateViewOptions(...args);
+    options.components['input-replace'] = InputReplace;
+    options.components['span-replace'] = SpanReplace;
     options.remarkPlugins.push(inputReplacePlugin as any);
     return options;
   };
@@ -34,15 +36,17 @@ const activate = (): void => {
   const originalGeneratePreviewOptions = optionsGenerators.customGeneratePreviewOptions;
   optionsGenerators.customGeneratePreviewOptions = (...args: any[]) => {
     const preview = originalGeneratePreviewOptions ? originalGeneratePreviewOptions(...args) : optionsGenerators.generatePreviewOptions(...args);
+    preview.components['input-replace'] = InputReplace;
+    preview.components['span-replace'] = SpanReplace;
     preview.remarkPlugins.push(inputReplacePlugin as any);
     return preview;
   };
 
-  if (document.readyState !== 'loading') {
+/*  if (document.readyState !== 'loading') {
     replaceCustomTags();
   } else {
     document.addEventListener('DOMContentLoaded', replaceCustomTags);
-  }
+  }*/
 };
 
 const deactivate = (): void => {

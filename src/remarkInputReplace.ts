@@ -24,15 +24,15 @@ export const inputReplacePlugin: Plugin = () => {
         const data = n.data || (n.data = {});
         const name = n.attributes.name || '';
         const placeholder = n.attributes.placeholder || '';
-        data.hName = 'input';
-        data.hProperties = { name, placeholder, disabled: undefined, type: 'text' };
+        data.hName = 'input-replace';
+        data.hProperties = { name, placeholder };
         data.hChildren = [];
       }
       if (n.name === 'replace') {
         const data = n.data || (n.data = {});
         const target = n.attributes.target || '';
         const value = n.attributes.value || '';
-        data.hName = 'span';
+        data.hName = 'span-replace';
         data.hProperties = { 'data-target': target };
         data.hChildren = [{ type: 'text', value }] as unknown as Node[];
       }
