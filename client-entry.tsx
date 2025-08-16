@@ -4,6 +4,7 @@ import { createRoot } from 'react-dom/client';
 import InputReplace from './src/components/InputReplace';
 import SpanReplace from './src/components/SpanReplace';
 import { inputReplacePlugin } from './src/remarkInputReplace';
+import remarkDirective from 'remark-directive';
 
 /*function replaceCustomTags() {
   document.querySelectorAll('input-replace').forEach(el => {
@@ -28,6 +29,7 @@ const activate = (): void => {
     const options = originalCustomViewOptions ? originalCustomViewOptions(...args) : optionsGenerators.generateViewOptions(...args);
     options.components['input-replace'] = InputReplace;
     options.components['span-replace'] = SpanReplace;
+    options.remarkPlugins.push(remarkDirective);
     options.remarkPlugins.push(inputReplacePlugin as any);
     return options;
   };
@@ -38,6 +40,7 @@ const activate = (): void => {
     const preview = originalGeneratePreviewOptions ? originalGeneratePreviewOptions(...args) : optionsGenerators.generatePreviewOptions(...args);
     preview.components['input-replace'] = InputReplace;
     preview.components['span-replace'] = SpanReplace;
+    preview.remarkPlugins.push(remarkDirective);
     preview.remarkPlugins.push(inputReplacePlugin as any);
     return preview;
   };
