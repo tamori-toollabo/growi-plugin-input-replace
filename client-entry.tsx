@@ -6,6 +6,9 @@ import SpanReplace from './src/components/SpanReplace';
 import { inputReplacePlugin } from './src/remarkInputReplace';
 
 function replaceCustomTags() {
+  console.log('input-replace count:', document.querySelectorAll('input-replace').length);
+  console.log('span-replace count:', document.querySelectorAll('span-replace').length);
+
   document.querySelectorAll('input-replace').forEach(el => {
     const name = el.getAttribute('name') || '';
     const placeholder = el.getAttribute('placeholder') || '';
