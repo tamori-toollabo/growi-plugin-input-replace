@@ -25,7 +25,7 @@ export const inputReplacePlugin: Plugin = () => {
         const name = n.attributes.name || '';
         const placeholder = n.attributes.placeholder || '';
         data.hName = 'input';
-        data.hProperties = { name, placeholder, type: 'text' };
+        data.hProperties = { name, placeholder, disabled: undefined, type: 'text' };
         data.hChildren = [];
       }
       if (n.name === 'replace') {
