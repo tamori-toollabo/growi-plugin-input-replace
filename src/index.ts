@@ -1,4 +1,4 @@
-import activate from './client-entry';
+import activate from '../client-entry';
 
 export default {
 	activate,

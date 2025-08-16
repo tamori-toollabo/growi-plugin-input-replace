@@ -22,7 +22,7 @@
   },
   "include": [
     "./src/**/*"
-  ],
+, "client-entry.tsx"  ],
   "exclude": [
     "./dist"
   ]

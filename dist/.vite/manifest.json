@@ -1,8 +1,8 @@
 {
-  "src/client-entry.tsx": {
-    "file": "client-entry.js",
+  "client-entry.tsx": {
+    "file": "assets/client-entry-Dd_lGQTV.js",
     "name": "client-entry",
-    "src": "src/client-entry.tsx",
+    "src": "client-entry.tsx",
     "isEntry": true
   }
 }
