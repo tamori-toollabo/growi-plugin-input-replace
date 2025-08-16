@@ -1,9 +1,9 @@
 declare const growiFacade: any;
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import InputReplace from './components/InputReplace';
-import SpanReplace from './components/SpanReplace';
-import { inputReplacePlugin } from './remarkInputReplace';
+import InputReplace from './src/components/InputReplace';
+import SpanReplace from './src/components/SpanReplace';
+import { inputReplacePlugin } from './src/remarkInputReplace';
 
 function replaceCustomTags() {
   document.querySelectorAll('input-replace').forEach(el => {
