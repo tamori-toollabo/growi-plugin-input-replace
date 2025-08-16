@@ -19,7 +19,7 @@ interface GrowiNode extends Node {
 export const inputReplacePlugin: Plugin = () => {
   return (tree: Node) => {
     visit(tree, 'leafDirective', (node: Node) => {
-      const n = node as GrowiNode;
+      const n = node as unknown as GrowiNode;
       if (n.name === 'input') {
         const data = n.data || (n.data = {});
         const name = n.attributes.name || '';
