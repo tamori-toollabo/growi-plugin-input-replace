@@ -47,7 +47,7 @@ const activate = (): void => {
       const { node, ...inputProps } = props;
       return (
         <InputReplaceProvider>
-          <InputReplace {...inputProps} />
+          <InputReplace {...props} />
         </InputReplaceProvider>
       );
     };
@@ -55,7 +55,7 @@ const activate = (): void => {
       const { node, ...spanProps } = props;
       return (
         <InputReplaceProvider>
-          <SpanReplace {...spanProps} />
+          <SpanReplace {...props} />
         </InputReplaceProvider>
       );
     };
