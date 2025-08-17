@@ -18,14 +18,14 @@ const activate = (): void => {
   optionsGenerators.customGenerateViewOptions = (...args: any[]) => {
     const options = originalCustomViewOptions ? originalCustomViewOptions(...args) : optionsGenerators.generateViewOptions(...args);
     // Providerでラップしたコンポーネントを登録
-    options.components['inputreplace'] = (props: React.ComponentProps<typeof InputReplace>) => (
+    options.components['inputreplace'] = (props: any) => (
       <InputReplaceProvider>
-        <InputReplace {...props} />
+        <InputReplace {...(props.node?.properties ?? {})} />
       </InputReplaceProvider>
     );
-    options.components['spanreplace'] = (props: React.ComponentProps<typeof SpanReplace>) => (
+    options.components['spanreplace'] = (props: any) => (
       <InputReplaceProvider>
-        <SpanReplace {...props} />
+        <SpanReplace {...(props.node?.properties ?? {})} />
       </InputReplaceProvider>
     );
     options.remarkPlugins.push(remarkDirective);
@@ -37,14 +37,14 @@ const activate = (): void => {
   const originalGeneratePreviewOptions = optionsGenerators.customGeneratePreviewOptions;
   optionsGenerators.customGeneratePreviewOptions = (...args: any[]) => {
     const preview = originalGeneratePreviewOptions ? originalGeneratePreviewOptions(...args) : optionsGenerators.generatePreviewOptions(...args);
-    preview.components['inputreplace'] = (props: React.ComponentProps<typeof InputReplace>) => (
+    preview.components['inputreplace'] = (props: any) => (
       <InputReplaceProvider>
-        <InputReplace {...props} />
+        <InputReplace {...(props.node?.properties ?? {})} />
       </InputReplaceProvider>
     );
-    preview.components['spanreplace'] = (props: React.ComponentProps<typeof SpanReplace>) => (
+    preview.components['spanreplace'] = (props: any) => (
       <InputReplaceProvider>
-        <SpanReplace {...props} />
+        <SpanReplace {...(props.node?.properties ?? {})} />
       </InputReplaceProvider>
     );
     preview.remarkPlugins.push(remarkDirective);
