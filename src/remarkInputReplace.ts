@@ -25,7 +25,7 @@ export const inputReplacePlugin: Plugin = () => {
         const name = n.attributes.name || '';
         const placeholder = n.attributes.placeholder || '';
         data.hName = 'inputreplace';
-        data.hProperties = { name, placeholder };
+        data.hProperties = { 'target': name, 'placeholder': placeholder };
         data.hChildren = [];
       }
       if (n.name === 'replace') {
@@ -33,7 +33,7 @@ export const inputReplacePlugin: Plugin = () => {
         const target = n.attributes.target || '';
         const value = n.attributes.value || '';
         data.hName = 'spanreplace';
-        data.hProperties = { 'data-target': target };
+        data.hProperties = { 'target': target };
         data.hChildren = [{ type: 'text', value }] as unknown as Node[];
       }
     });
