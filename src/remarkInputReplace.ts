@@ -22,19 +22,18 @@ export const inputReplacePlugin: Plugin = () => {
       const n = node as unknown as GrowiNode;
       if (n.name === 'input') {
         const data = n.data || (n.data = {});
-        const name = n.attributes.name || '';
+        const target = n.children[0].value;
         const placeholder = n.attributes.placeholder || '';
         data.hName = 'inputreplace';
-        data.hProperties = { 'target': name, 'placeholder': placeholder };
+        data.hProperties = { 'target': target, 'placeholder': placeholder };
         data.hChildren = [];
       }
       if (n.name === 'replace') {
         const data = n.data || (n.data = {});
-        const target = n.attributes.target || '';
-        const value = n.attributes.value || '';
+        const target = n.children[0].value;
         data.hName = 'spanreplace';
         data.hProperties = { 'target': target };
-        data.hChildren = [{ type: 'text', value }] as unknown as Node[];
+        data.hChildren = [];
       }
     });
   };
