@@ -18,8 +18,22 @@ const activate = (): void => {
   optionsGenerators.customGenerateViewOptions = (...args: any[]) => {
     const options = originalCustomViewOptions ? originalCustomViewOptions(...args) : optionsGenerators.generateViewOptions(...args);
     // Providerでラップしたコンポーネントを登録
-  options.components['inputreplace'] = InputReplace;
-  options.components['spanreplace'] = SpanReplace;
+    options.components['inputreplace'] = (props: any) => {
+      const { node, ...inputProps } = props;
+      return (
+        <InputReplaceProvider>
+          <InputReplace {...inputProps} />
+        </InputReplaceProvider>
+      );
+    };
+    options.components['spanreplace'] = (props: any) => {
+      const { node, ...spanProps } = props;
+      return (
+        <InputReplaceProvider>
+          <SpanReplace {...spanProps} />
+        </InputReplaceProvider>
+      );
+    };
     options.remarkPlugins.push(remarkDirective);
     options.remarkPlugins.push(inputReplacePlugin as any);
     return options;
@@ -29,8 +43,22 @@ const activate = (): void => {
   const originalGeneratePreviewOptions = optionsGenerators.customGeneratePreviewOptions;
   optionsGenerators.customGeneratePreviewOptions = (...args: any[]) => {
     const preview = originalGeneratePreviewOptions ? originalGeneratePreviewOptions(...args) : optionsGenerators.generatePreviewOptions(...args);
-  preview.components['inputreplace'] = InputReplace;
-  preview.components['spanreplace'] = SpanReplace;
+    preview.components['inputreplace'] = (props: any) => {
+      const { node, ...inputProps } = props;
+      return (
+        <InputReplaceProvider>
+          <InputReplace {...inputProps} />
+        </InputReplaceProvider>
+      );
+    };
+    preview.components['spanreplace'] = (props: any) => {
+      const { node, ...spanProps } = props;
+      return (
+        <InputReplaceProvider>
+          <SpanReplace {...spanProps} />
+        </InputReplaceProvider>
+      );
+    };
     preview.remarkPlugins.push(remarkDirective);
     preview.remarkPlugins.push(inputReplacePlugin as any);
     return preview;
