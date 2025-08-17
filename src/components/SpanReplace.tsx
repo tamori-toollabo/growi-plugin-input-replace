@@ -1,12 +1,13 @@
 import React from 'react';
+import { useInputReplace } from './InputReplaceContext';
 
 type Props = {
 	target: string;
-	value: string;
 };
 
-const SpanReplace: React.FC<Props> = ({ target, value }) => {
-	return <span className="replace-target" data-target={target}>{value}</span>;
+const SpanReplace: React.FC<Props> = ({ target }) => {
+	const { values } = useInputReplace();
+	return <span>{values[target] || ''}</span>;
 };
 
 export default SpanReplace;
